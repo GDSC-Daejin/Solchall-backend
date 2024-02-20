@@ -3,6 +3,7 @@ package com.example.solchall2024.controller;
 import com.example.solchall2024.domain.Article;
 import com.example.solchall2024.dto.AddArticleRequest;
 import com.example.solchall2024.dto.ArticleResponse;
+import com.example.solchall2024.dto.UpdateArticleRequest;
 import com.example.solchall2024.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,9 @@ public class BlogApiController {
                 .body(savedArticle);
     }
 
+
+
+
     @GetMapping("/api/articles")
     public ResponseEntity<List<ArticleResponse>> findAllArticles() {
         List<ArticleResponse> articles = blogService.findAll()
@@ -35,7 +39,6 @@ public class BlogApiController {
                 .body(articles);
 
     }
-
     @GetMapping("/api/articles/{id}")
     public ResponseEntity<ArticleResponse> findArticle(@PathVariable long id){
         Article article = blogService.findById(id);
@@ -43,6 +46,20 @@ public class BlogApiController {
         return ResponseEntity.ok()
                 .body(new ArticleResponse(article));
     }
+
+
+
+
+    @PutMapping("/api/articles/{id}")
+    public ResponseEntity<Article> updateArticle(@PathVariable long id, @RequestBody UpdateArticleRequest request){
+        Article updatedArticle = blogService.update(id, request);
+
+        return ResponseEntity.ok()
+                .body(updatedArticle);
+    }
+
+
+
 
 
 
