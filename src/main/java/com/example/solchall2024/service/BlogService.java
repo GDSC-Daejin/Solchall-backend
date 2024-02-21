@@ -36,7 +36,7 @@ public class BlogService {
 
         article.update(request.getTitle(), request.getContent());
 
-        return article;
+       return article;
     }
 
 
